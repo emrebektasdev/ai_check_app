@@ -1,0 +1,71 @@
+Analyzing AI_Check_App...                                       
+
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\theme\app_theme.dart:164:41 - deprecated_member_use
+   info - The imported package 'hive' isn't a dependency of the importing package - lib\data\models\scan_history_item.dart:1:8 - depend_on_referenced_packages
+  error - Target of URI hasn't been generated: 'package:ai_check_app/data/models/scan_history_item.g.dart' - lib\data\models\scan_history_item.dart:3:6 - uri_has_not_been_generated
+  error - Missing concrete implementations of 'getter mixin _$ScanResult on Object.aiScore', 'getter mixin _$ScanResult on Object.confidence', 'getter mixin _$ScanResult on Object.detectedModel', 'getter mixin _$ScanResult on Object.imageFile', and 1 more - lib\data\models\scan_result_model.dart:9:7 - non_abstract_class_inherits_abstract_member
+  error - Classes can only extend other classes - lib\data\providers\history_notifier.dart:7:31 - extends_non_class
+  error - Too many positional arguments: 0 expected, but 1 found - lib\data\providers\history_notifier.dart:10:45 - extra_positional_arguments
+  error - Undefined name 'state' - lib\data\providers\history_notifier.dart:16:5 - undefined_identifier
+  error - The function 'StateNotifierProvider' isn't defined - lib\data\providers\history_notifier.dart:32:5 - undefined_function
+  error - Target of URI doesn't exist: '../../providers/scan_providers.dart' - lib\data\providers\scan_notifier.dart:8:8 - uri_does_not_exist
+  error - Classes can only extend other classes - lib\data\providers\scan_notifier.dart:27:28 - extends_non_class
+  error - Too many positional arguments: 0 expected, but 1 found - lib\data\providers\scan_notifier.dart:33:13 - extra_positional_arguments
+  error - Undefined name 'state' - lib\data\providers\scan_notifier.dart:36:5 - undefined_identifier
+  error - Undefined name 'state' - lib\data\providers\scan_notifier.dart:40:30 - undefined_identifier
+  error - The getter 'id' isn't defined for the type 'ScanResult' - lib\data\providers\scan_notifier.dart:44:14 - undefined_getter
+  error - Undefined name 'state' - lib\data\providers\scan_notifier.dart:59:7 - undefined_identifier
+  error - Undefined name 'state' - lib\data\providers\scan_notifier.dart:64:5 - undefined_identifier
+  error - The function 'StateNotifierProvider' isn't defined - lib\data\providers\scan_notifier.dart:74:30 - undefined_function
+  error - Undefined name 'scanRepositoryProvider' - lib\data\providers\scan_notifier.dart:78:15 - undefined_identifier
+  error - Classes can only extend other classes - lib\data\providers\settings_notifier.dart:34:32 - extends_non_class
+  error - Too many positional arguments: 0 expected, but 1 found - lib\data\providers\settings_notifier.dart:39:9 - extra_positional_arguments
+  error - Undefined name 'state' - lib\data\providers\settings_notifier.dart:49:5 - undefined_identifier
+  error - Undefined name 'state' - lib\data\providers\settings_notifier.dart:49:13 - undefined_identifier
+  error - Undefined name 'state' - lib\data\providers\settings_notifier.dart:54:5 - undefined_identifier
+  error - Undefined name 'state' - lib\data\providers\settings_notifier.dart:54:13 - undefined_identifier
+  error - Undefined name 'state' - lib\data\providers\settings_notifier.dart:58:22 - undefined_identifier
+  error - Undefined name 'state' - lib\data\providers\settings_notifier.dart:60:5 - undefined_identifier
+  error - Undefined name 'state' - lib\data\providers\settings_notifier.dart:60:13 - undefined_identifier
+  error - Undefined name 'state' - lib\data\providers\settings_notifier.dart:65:5 - undefined_identifier
+  error - Undefined name 'state' - lib\data\providers\settings_notifier.dart:65:13 - undefined_identifier
+  error - Undefined name 'state' - lib\data\providers\settings_notifier.dart:70:5 - undefined_identifier
+  error - Undefined name 'state' - lib\data\providers\settings_notifier.dart:70:13 - undefined_identifier
+  error - The function 'StateNotifierProvider' isn't defined - lib\data\providers\settings_notifier.dart:80:5 - undefined_function
+  error - The named parameter 'aiScore' is required, but there's no corresponding argument - lib\data\repositories\sight_engine_repository.dart:29:24 - missing_required_argument
+  error - The named parameter 'confidence' is required, but there's no corresponding argument - lib\data\repositories\sight_engine_repository.dart:29:24 - missing_required_argument
+  error - The named parameter 'imageFile' is required, but there's no corresponding argument - lib\data\repositories\sight_engine_repository.dart:29:24 - missing_required_argument
+  error - The named parameter 'timestamp' is required, but there's no corresponding argument - lib\data\repositories\sight_engine_repository.dart:29:24 - missing_required_argument
+  error - The named parameter 'id' isn't defined - lib\data\repositories\sight_engine_repository.dart:30:11 - undefined_named_parameter
+  error - The named parameter 'aiProbability' isn't defined - lib\data\repositories\sight_engine_repository.dart:31:11 - undefined_named_parameter
+  error - The named parameter 'imagePath' isn't defined - lib\data\repositories\sight_engine_repository.dart:32:11 - undefined_named_parameter
+  error - The named parameter 'scannedAt' isn't defined - lib\data\repositories\sight_engine_repository.dart:33:11 - undefined_named_parameter
+warning - Unused import: '../../../../data/models/scan_history_item.dart' - lib\features\history\presentation\pages\history_page.dart:10:8 - unused_import
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\history\presentation\pages\history_page.dart:103:40 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\history\presentation\pages\history_page.dart:104:59 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\history\presentation\pages\history_page.dart:191:40 - deprecated_member_use
+warning - Unused import: '../../../../data/models/scan_history_item.dart' - lib\features\home\presentation\pages\home_page.dart:10:8 - unused_import
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\home\presentation\pages\home_page.dart:82:51 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\home\presentation\pages\home_page.dart:198:48 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\paywall\presentation\pages\paywall_page.dart:50:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\paywall\presentation\pages\paywall_page.dart:200:32 - deprecated_member_use
+   info - 'Share' is deprecated and shouldn't be used. Use SharePlus instead - lib\features\result\presentation\pages\result_page.dart:34:15 - deprecated_member_use
+   info - 'shareXFiles' is deprecated and shouldn't be used. Use SharePlus.instance.share() instead - lib\features\result\presentation\pages\result_page.dart:34:21 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\result\presentation\pages\result_page.dart:177:49 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\result\presentation\pages\result_page.dart:206:22 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\result\presentation\pages\result_page.dart:207:41 - deprecated_member_use
+  error - The named parameter 'color' isn't defined - lib\features\scan\presentation\pages\scan_page.dart:122:21 - undefined_named_parameter
+  error - The named parameter 'strokeWidth' isn't defined - lib\features\scan\presentation\pages\scan_page.dart:123:21 - undefined_named_parameter
+  error - The named parameter 'dashPattern' isn't defined - lib\features\scan\presentation\pages\scan_page.dart:124:21 - undefined_named_parameter
+  error - The named parameter 'borderType' isn't defined - lib\features\scan\presentation\pages\scan_page.dart:125:21 - undefined_named_parameter
+  error - Undefined name 'BorderType' - lib\features\scan\presentation\pages\scan_page.dart:125:33 - undefined_identifier
+  error - The named parameter 'radius' isn't defined - lib\features\scan\presentation\pages\scan_page.dart:126:21 - undefined_named_parameter
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\scan\presentation\pages\scan_page.dart:148:68 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\scan\presentation\pages\scan_page.dart:152:44 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\settings\presentation\pages\settings_page.dart:33:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\settings\presentation\pages\settings_page.dart:62:43 - deprecated_member_use
+   info - 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor instead. This feature was deprecated after v3.31.0-2.0.pre - lib\features\settings\presentation\pages\settings_page.dart:165:19 - deprecated_member_use
+  error - The function 'ScanHistoryItemAdapter' isn't defined - lib\main.dart:20:24 - undefined_function
+warning - Unused import: '../../core/theme/app_theme.dart' - lib\shared\widgets\main_layout.dart:3:8 - unused_import
+  error - The name 'MyApp' isn't a class - test\widget_test.dart:16:35 - creation_with_non_type
+

@@ -1,0 +1,25 @@
+Analyzing AI_Check_App...                                       
+
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\theme\app_theme.dart:164:41 - deprecated_member_use
+  error - Target of URI hasn't been generated: 'package:ai_check_app/data/models/scan_history_item.g.dart' - lib\data\models\scan_history_item.dart:3:6 - uri_has_not_been_generated
+  error - Missing concrete implementations of 'getter mixin _$ScanResult on Object.aiScore', 'getter mixin _$ScanResult on Object.confidence', 'getter mixin _$ScanResult on Object.detectedModel', 'getter mixin _$ScanResult on Object.imageFile', and 1 more - lib\data\models\scan_result_model.dart:9:7 - non_abstract_class_inherits_abstract_member
+  error - The getter 'id' isn't defined for the type 'ScanResult' - lib\data\providers\scan_notifier.dart:46:14 - undefined_getter
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\history\presentation\pages\history_page.dart:102:40 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\history\presentation\pages\history_page.dart:103:59 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\history\presentation\pages\history_page.dart:190:40 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\home\presentation\pages\home_page.dart:81:51 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\home\presentation\pages\home_page.dart:197:48 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\paywall\presentation\pages\paywall_page.dart:50:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\paywall\presentation\pages\paywall_page.dart:200:32 - deprecated_member_use
+   info - 'Share' is deprecated and shouldn't be used. Use SharePlus instead - lib\features\result\presentation\pages\result_page.dart:34:15 - deprecated_member_use
+   info - 'shareXFiles' is deprecated and shouldn't be used. Use SharePlus.instance.share() instead - lib\features\result\presentation\pages\result_page.dart:34:21 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\result\presentation\pages\result_page.dart:177:49 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\result\presentation\pages\result_page.dart:206:22 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\result\presentation\pages\result_page.dart:207:41 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\scan\presentation\pages\scan_page.dart:140:66 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\scan\presentation\pages\scan_page.dart:144:42 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\settings\presentation\pages\settings_page.dart:33:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\settings\presentation\pages\settings_page.dart:62:43 - deprecated_member_use
+  error - The function 'ScanHistoryItemAdapter' isn't defined - lib\main.dart:20:24 - undefined_function
+  error - The name 'MyApp' isn't a class - test\widget_test.dart:16:35 - creation_with_non_type
+
