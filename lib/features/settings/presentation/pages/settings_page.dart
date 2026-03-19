@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/app_theme.dart';
 import '../../../../data/providers/settings_notifier.dart';
+import '../../../../data/providers/auth_notifier.dart';
 
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
@@ -11,6 +12,8 @@ class SettingsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final settingsState = ref.watch(settingsNotifierProvider);
     final settingsNotifier = ref.read(settingsNotifierProvider.notifier);
+    final authState = ref.watch(authNotifierProvider);
+    final authNotifier = ref.read(authNotifierProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Ayarlar')),
@@ -118,6 +121,50 @@ class SettingsPage extends ConsumerWidget {
                     ),
                   ],
                 ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 32),
+
+          // Account Settings
+          _buildSectionTitle(context, 'Hesap'),
+          Card(
+            child: authState.when(
+              data: (user) => user != null
+                  ? ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: user.photoURL != null
+                            ? NetworkImage(user.photoURL!)
+                            : null,
+                        child: user.photoURL == null
+                            ? const Icon(Icons.person)
+                            : null,
+                      ),
+                      title: Text(user.displayName ?? 'Kullanıcı'),
+                      subtitle: Text(user.email ?? ''),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.logout, color: Colors.red),
+                        onPressed: () => authNotifier.signOut(),
+                      ),
+                    )
+                  : ListTile(
+                      leading: const Icon(Icons.login, color: AppColors.accent),
+                      title: const Text('Giriş Yap'),
+                      subtitle: const Text(
+                        'Verilerinizi senkronize etmek için',
+                      ),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                      onTap: () => authNotifier.signInWithGoogle(),
+                    ),
+              loading: () => const Padding(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                child: Center(child: CircularProgressIndicator()),
+              ),
+              error: (err, stack) => ListTile(
+                leading: const Icon(Icons.error, color: Colors.red),
+                title: const Text('Hata Oluştu'),
+                subtitle: Text(err.toString()),
+                onTap: () => authNotifier.signInWithGoogle(),
               ),
             ),
           ),

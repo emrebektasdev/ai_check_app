@@ -14,7 +14,7 @@ class SightEngineService {
     while (true) {
       try {
         FormData formData = FormData.fromMap({
-          'models': 'ai-generated',
+          'models': 'genai',
           'api_user': AppConstants.sightEngineApiUser,
           'api_secret': AppConstants.sightEngineApiSecret,
           'media': await MultipartFile.fromFile(imageFile.path),

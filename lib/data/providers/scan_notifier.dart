@@ -3,9 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/scan_result_model.dart';
 import '../models/scan_history_item.dart';
-import '../repositories/sight_engine_repository.dart';
+import '../repositories/scan_repository.dart';
 import '../repositories/history_repository.dart';
 import 'history_notifier.dart';
+import 'scan_providers.dart';
 
 // Manual immutable state class for Scan
 class ScanState {
@@ -24,12 +25,12 @@ class ScanState {
 }
 
 class ScanNotifier extends Notifier<ScanState> {
-  late final SightEngineRepository _scanRepository;
+  late final ScanRepository _scanRepository;
   late final HistoryRepository _historyRepository;
 
   @override
   ScanState build() {
-    _scanRepository = ref.watch(sightEngineRepositoryProvider);
+    _scanRepository = ref.watch(scanRepositoryProvider);
     _historyRepository = ref.watch(historyRepositoryProvider);
     return const ScanState();
   }
@@ -37,7 +38,7 @@ class ScanNotifier extends Notifier<ScanState> {
   Future<void> scanImage(File imageFile) async {
     state = ScanState.loading();
 
-    final response = await _scanRepository.analyzeImage(imageFile.path);
+    final response = await _scanRepository.analyzeImage(imageFile);
 
     response.fold((error) => state = ScanState.error(error), (result) async {
       // Create History Item

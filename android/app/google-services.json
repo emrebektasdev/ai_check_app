@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "934618507565",
+    "project_id": "ai-check-app-1ffa4",
+    "storage_bucket": "ai-check-app-1ffa4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934618507565:android:fb9217b8b1ed3850fb8ba4",
+        "android_client_info": {
+          "package_name": "com.example.ai_check_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "934618507565-aloadi5tok04qkmn57l999t8cmls7bu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFMm26Dp2xxCSCV-Bn46huo2ZuoFv5pzY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934618507565-aloadi5tok04qkmn57l999t8cmls7bu8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

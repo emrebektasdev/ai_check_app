@@ -31,9 +31,12 @@ class _ResultPageState extends ConsumerState<ResultPage> {
         await imagePath.writeAsBytes(image);
 
         // Usage of Share.shareXFiles for modern share_plus
-        await Share.shareXFiles([
-          XFile(imagePath.path),
-        ], text: 'TruthLens Analiz Sonucum!');
+        await SharePlus.instance.share(
+          ShareParams(
+            files: [XFile(imagePath.path)],
+            text: 'TruthLens Analiz Sonucum!',
+          ),
+        );
       }
     } catch (e) {
       if (mounted) {
@@ -108,7 +111,7 @@ class _ResultPageState extends ConsumerState<ResultPage> {
                                         ),
                                   ),
                                   Text(
-                                    isAI ? 'Yapay Zeka' : 'Gerçek',
+                                    'AI',
                                     style: Theme.of(context).textTheme.bodyLarge
                                         ?.copyWith(
                                           color: AppColors.textMuted,
@@ -148,39 +151,6 @@ class _ResultPageState extends ConsumerState<ResultPage> {
                   ],
                 ),
                 const SizedBox(height: 40),
-
-                // Heatmap Placeholder
-                if (isAI) ...[
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Sıcaklık Haritası (Tahmini)',
-                      style: Theme.of(
-                        context,
-                      ).textTheme.titleLarge?.copyWith(fontSize: 20),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Container(
-                    height: 200,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppSizes.radiusLg),
-                      color: AppColors.surface,
-                      image: const DecorationImage(
-                        image: NetworkImage(
-                          'https://via.placeholder.com/600x300?text=Heatmap+Not+Available',
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                      border: Border.all(
-                        color: AppColors.accent.withValues(alpha: 0.5),
-                        width: 1,
-                      ),
-                    ),
-                  ),
-                ],
-                const SizedBox(height: 32),
 
                 // Share CTA
                 SizedBox(

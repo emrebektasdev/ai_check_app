@@ -171,11 +171,9 @@ class HomePage extends ConsumerWidget {
                                   borderRadius: BorderRadius.circular(
                                     AppSizes.radiusSm,
                                   ),
-                                  image: DecorationImage(
-                                    image: FileImage(File(item.imagePath)),
-                                    fit: BoxFit.cover,
-                                  ),
                                 ),
+                                clipBehavior: Clip.antiAlias,
+                                child: _buildHistoryThumbnail(item.imagePath),
                               ),
                               title: Text(
                                 'Görsel Analizi',
@@ -206,6 +204,17 @@ class HomePage extends ConsumerWidget {
                                 ),
                               ),
                               onTap: () {
+                                if (!File(item.imagePath).existsSync()) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        'Bu kaydin gorseli bulunamadi.',
+                                      ),
+                                    ),
+                                  );
+                                  return;
+                                }
+
                                 // Map history item to ScanResult for the ResultPage
                                 final scanResult = ScanResult(
                                   id: item.id,
@@ -234,5 +243,20 @@ class HomePage extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildHistoryThumbnail(String imagePath) {
+    final imageFile = File(imagePath);
+
+    if (!imageFile.existsSync()) {
+      return const Center(
+        child: Icon(
+          Icons.image_not_supported_outlined,
+          color: AppColors.textMuted,
+        ),
+      );
+    }
+
+    return Image.file(imageFile, fit: BoxFit.cover);
   }
 }

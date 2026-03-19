@@ -30,6 +30,7 @@ class _ScanPageState extends ConsumerState<ScanPage> {
       source: source,
       maxWidth: 1600,
       maxHeight: 1600,
+      imageQuality: 100,
     );
 
     if (pickedFile != null) {

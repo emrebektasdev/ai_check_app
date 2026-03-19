@@ -53,6 +53,30 @@ class ScanHistoryItem {
       timestamp: timestamp ?? this.timestamp,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'imagePath': imagePath,
+      'aiScore': aiScore,
+      'isAiGenerated': isAiGenerated,
+      'confidence': confidence,
+      'detectedModel': detectedModel,
+      'timestamp': timestamp.toIso8601String(),
+    };
+  }
+
+  factory ScanHistoryItem.fromMap(Map<String, dynamic> map) {
+    return ScanHistoryItem(
+      id: map['id'] as String,
+      imagePath: map['imagePath'] as String,
+      aiScore: (map['aiScore'] as num).toDouble(),
+      isAiGenerated: map['isAiGenerated'] as bool,
+      confidence: map['confidence'] as String,
+      detectedModel: map['detectedModel'] as String?,
+      timestamp: DateTime.parse(map['timestamp'] as String),
+    );
+  }
 }
 
 class ScanHistoryItemAdapter extends TypeAdapter<ScanHistoryItem> {

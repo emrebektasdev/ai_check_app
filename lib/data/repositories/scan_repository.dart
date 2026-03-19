@@ -14,9 +14,9 @@ class ScanRepository {
     try {
       final response = await _service.checkImage(imageFile);
 
-      final aiGeneratedInfo = response['ai_generated'];
+      final typeInfo = response['type'] as Map<String, dynamic>?;
       final double aiScore =
-          (aiGeneratedInfo?['score'] as num?)?.toDouble() ?? 0.0;
+          (typeInfo?['ai_generated'] as num?)?.toDouble() ?? 0.0;
 
       ScanConfidence confidence;
       if (aiScore > 0.80) {
@@ -48,7 +48,7 @@ class ScanRepository {
       return Left(_handleDioError(e));
     } catch (e) {
       return Left(
-        'Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin. / An unexpected error occurred.',
+        'Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.',
       );
     }
   }
@@ -58,13 +58,20 @@ class ScanRepository {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
-        return 'Bağlantı zaman aşımına uğradı. / Connection timed out.';
+        return 'Bağlantı zaman aşımına uğradı. Lütfen tekrar deneyin.';
       case DioExceptionType.badResponse:
-        return 'Sunucu hatası. (Kod: ${e.response?.statusCode}) / Server error.';
+        final statusCode = e.response?.statusCode;
+        if (statusCode == 401 || statusCode == 403) {
+          return 'API kimlik doğrulaması başarısız. Lütfen uygulama ayarlarınızı kontrol edin.';
+        }
+        if (statusCode == 429) {
+          return 'Günlük analiz limitine ulaşıldı. Lütfen daha sonra tekrar deneyin.';
+        }
+        return 'Sunucu hatası oluştu. (Kod: $statusCode) Lütfen tekrar deneyin.';
       case DioExceptionType.connectionError:
-        return 'İnternet bağlantısı yok veya sunucuya ulaşılamıyor. / No internet connection.';
+        return 'İnternet bağlantısı yok veya sunucuya ulaşılamıyor. Bağlantınızı kontrol edin.';
       default:
-        return 'Bir ağ hatası oluştu. / A network error occurred.';
+        return 'Bir ağ hatası oluştu. Lütfen tekrar deneyin.';
     }
   }
 }

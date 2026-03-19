@@ -80,11 +80,9 @@ class HistoryPage extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(
                             AppSizes.radiusSm,
                           ),
-                          image: DecorationImage(
-                            image: FileImage(File(item.imagePath)),
-                            fit: BoxFit.cover,
-                          ),
                         ),
+                        clipBehavior: Clip.antiAlias,
+                        child: _buildHistoryThumbnail(item.imagePath),
                       ),
                       title: const Text(
                         'Analiz Raporu',
@@ -100,7 +98,9 @@ class HistoryPage extends ConsumerWidget {
                         ),
                         decoration: BoxDecoration(
                           color: color.withValues(alpha: 0.15),
-                          border: Border.all(color: color.withValues(alpha: 0.5)),
+                          border: Border.all(
+                            color: color.withValues(alpha: 0.5),
+                          ),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Column(
@@ -126,6 +126,15 @@ class HistoryPage extends ConsumerWidget {
                         ),
                       ),
                       onTap: () {
+                        if (!File(item.imagePath).existsSync()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Bu kaydin gorseli bulunamadi.'),
+                            ),
+                          );
+                          return;
+                        }
+
                         // Re-create the ScanResult state and go to ResultPage (readonly viewing)
                         final scanResult = ScanResult(
                           id: item.id,
@@ -205,5 +214,20 @@ class HistoryPage extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  Widget _buildHistoryThumbnail(String imagePath) {
+    final imageFile = File(imagePath);
+
+    if (!imageFile.existsSync()) {
+      return const Center(
+        child: Icon(
+          Icons.image_not_supported_outlined,
+          color: AppColors.textMuted,
+        ),
+      );
+    }
+
+    return Image.file(imageFile, fit: BoxFit.cover);
   }
 }
