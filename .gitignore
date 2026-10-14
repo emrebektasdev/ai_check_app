@@ -52,3 +52,22 @@ security-tests/audit.json
 functions/.env*
 !functions/.env.example
 
+# Private credentials and signing material
+.env
+.env.*
+!.env.example
+!.env.template
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.template
+key.properties
+*.jks
+*.keystore
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+*-adminsdk-*.json
+service-account*.json
+.secret.local

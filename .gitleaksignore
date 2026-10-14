@@ -1,0 +1,11 @@
+# Exact historical false-positive fingerprints for Firebase client configuration.
+# Firebase API keys are public identifiers restricted to Firebase APIs.
+# No future commit, file or value is broadly excluded.
+# The single historical Sightengine credential was revoked; HTTP 401 verified on 2026-10-15.
+ff3dbc15ad317cc01f959c7608d8d458c3a077f3:lib/core/constants/app_constants.dart:generic-api-key:5
+8ce1ce2385f6837aae578eb1f195f93d06665bc5:android/app/google-services.json:gcp-api-key:23
+8ce1ce2385f6837aae578eb1f195f93d06665bc5:lib/firebase_options.dart:gcp-api-key:44
+8ce1ce2385f6837aae578eb1f195f93d06665bc5:lib/firebase_options.dart:gcp-api-key:54
+8ce1ce2385f6837aae578eb1f195f93d06665bc5:lib/firebase_options.dart:gcp-api-key:62
+8ce1ce2385f6837aae578eb1f195f93d06665bc5:lib/firebase_options.dart:gcp-api-key:72
+8ce1ce2385f6837aae578eb1f195f93d06665bc5:lib/firebase_options.dart:gcp-api-key:82
