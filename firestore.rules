@@ -1,0 +1,13 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid}/scan_history/{id} {
+      allow read, delete: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['id', 'imagePath', 'aiScore', 'isAiGenerated', 'confidence', 'detectedModel', 'timestamp'])
+        && request.resource.data.id == id && request.resource.data.aiScore is number
+        && request.resource.data.aiScore >= 0 && request.resource.data.aiScore <= 1;
+    }
+    // Quotas and all other records are server-only. Local history is not an entitlement.
+  }
+}

@@ -1,10 +1,10 @@
+import '../../../../data/providers/settings_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/strings.dart';
 import '../../../../core/theme/app_theme.dart';
-import '../../../../data/providers/settings_notifier.dart';
 
 class PaywallPage extends ConsumerWidget {
   const PaywallPage({super.key});
@@ -119,17 +119,7 @@ class PaywallPage extends ConsumerWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      ref
-                          .read(settingsNotifierProvider.notifier)
-                          .unlockPremium();
-                      context.pop();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Pro versiyona geçildi (Test)'),
-                        ),
-                      );
-                    },
+                    onPressed: null,
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       backgroundColor: AppColors.accent,
@@ -138,7 +128,7 @@ class PaywallPage extends ConsumerWidget {
                       ),
                     ),
                     child: Text(
-                      'TruthLens Pro\'yu Başlat',
+                      'Premium yakında',
                       style: TextStyle(
                         color: AppColors.background,
                         fontSize: 18,
