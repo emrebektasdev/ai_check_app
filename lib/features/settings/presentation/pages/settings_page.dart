@@ -272,9 +272,7 @@ class SettingsPage extends ConsumerWidget {
       builder: (context) => AlertDialog(
         backgroundColor: Theme.of(context).cardTheme.color,
         title: const Text('Premium Satın Alımı'),
-        content: const Text(
-          'Bu işlem test amaçlıdır. Premium modunu aktif edeceğim.',
-        ),
+        content: const Text('Premium henüz satışa açık değil.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -283,18 +281,7 @@ class SettingsPage extends ConsumerWidget {
               style: TextStyle(color: AppColors.textSecondary),
             ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              notifier.unlockPremium();
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Tebrikler! Premium aktif edildi.'),
-                ),
-              );
-            },
-            child: const Text('Satın Al'),
-          ),
+          ElevatedButton(onPressed: null, child: const Text('Yakında')),
         ],
       ),
     );

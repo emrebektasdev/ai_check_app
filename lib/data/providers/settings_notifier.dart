@@ -14,7 +14,8 @@ class SettingsState {
     required this.isPremium,
   });
 
-  bool get canScan => isPremium || dailyScanCount < 5;
+  // The callable enforces the quota; local preferences are display-only.
+  bool get canScan => true;
 
   SettingsState copyWith({
     bool? isDarkMode,
@@ -41,7 +42,7 @@ class SettingsNotifier extends Notifier<SettingsState> {
       isDarkMode: _prefs.getBool('isDarkMode') ?? true,
       language: _prefs.getString('language') ?? 'tr',
       dailyScanCount: _prefs.getInt('dailyScanCount') ?? 0,
-      isPremium: _prefs.getBool('isPremium') ?? false,
+      isPremium: false,
     );
   }
 
@@ -66,10 +67,7 @@ class SettingsNotifier extends Notifier<SettingsState> {
     state = state.copyWith(dailyScanCount: 0);
   }
 
-  void unlockPremium() {
-    _prefs.setBool('isPremium', true);
-    state = state.copyWith(isPremium: true);
-  }
+  // Premium is unavailable until store receipts are verified on the server.
 }
 
 // Global Providers

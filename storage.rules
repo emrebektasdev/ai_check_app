@@ -1,0 +1,7 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Analysis images are forwarded in-memory by the callable, never publicly uploaded.
+    match /{path=**} { allow read, write: if false; }
+  }
+}

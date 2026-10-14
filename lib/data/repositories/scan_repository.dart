@@ -1,77 +1,50 @@
 import 'dart:io';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-
+import 'package:cloud_functions/cloud_functions.dart';
 import '../models/scan_result_model.dart';
 import '../services/sight_engine_service.dart';
 
 class ScanRepository {
   final SightEngineService _service;
-
   ScanRepository(this._service);
 
   Future<Either<String, ScanResult>> analyzeImage(File imageFile) async {
     try {
       final response = await _service.checkImage(imageFile);
-
-      final typeInfo = response['type'] as Map<String, dynamic>?;
-      final double aiScore =
-          (typeInfo?['ai_generated'] as num?)?.toDouble() ?? 0.0;
-
-      ScanConfidence confidence;
-      if (aiScore > 0.80) {
-        confidence = ScanConfidence.high;
-      } else if (aiScore >= 0.50) {
-        confidence = ScanConfidence.medium;
-      } else {
-        confidence = ScanConfidence.low;
+      final score = response['type']?['ai_generated'];
+      if (score is! num || !score.isFinite || score < 0 || score > 1) {
+        return const Left('Analiz servisi geçerli bir sonuç döndürmedi.');
       }
-
-      String? detectedModel;
-      if (aiScore > 0.90) {
-        detectedModel = "Likely Midjourney/DALL-E";
-      } else if (aiScore >= 0.70) {
-        detectedModel = "AI Generated (model unknown)";
-      }
-
-      final result = ScanResult(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
-        imageFile: imageFile,
-        aiScore: aiScore,
-        confidence: confidence,
-        detectedModel: detectedModel,
-        timestamp: DateTime.now(),
+      final aiScore = score.toDouble();
+      return Right(
+        ScanResult(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          imageFile: imageFile,
+          aiScore: aiScore,
+          confidence: aiScore > 0.80
+              ? ScanConfidence.high
+              : aiScore >= 0.50
+              ? ScanConfidence.medium
+              : ScanConfidence.low,
+          // GenAI probability does not identify a particular generator/model.
+          detectedModel: null,
+          timestamp: DateTime.now(),
+        ),
       );
-
-      return Right(result);
-    } on DioException catch (e) {
-      return Left(_handleDioError(e));
-    } catch (e) {
-      return Left(
-        'Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.',
-      );
-    }
-  }
-
-  String _handleDioError(DioException e) {
-    switch (e.type) {
-      case DioExceptionType.connectionTimeout:
-      case DioExceptionType.sendTimeout:
-      case DioExceptionType.receiveTimeout:
-        return 'Bağlantı zaman aşımına uğradı. Lütfen tekrar deneyin.';
-      case DioExceptionType.badResponse:
-        final statusCode = e.response?.statusCode;
-        if (statusCode == 401 || statusCode == 403) {
-          return 'API kimlik doğrulaması başarısız. Lütfen uygulama ayarlarınızı kontrol edin.';
-        }
-        if (statusCode == 429) {
-          return 'Günlük analiz limitine ulaşıldı. Lütfen daha sonra tekrar deneyin.';
-        }
-        return 'Sunucu hatası oluştu. (Kod: $statusCode) Lütfen tekrar deneyin.';
-      case DioExceptionType.connectionError:
-        return 'İnternet bağlantısı yok veya sunucuya ulaşılamıyor. Bağlantınızı kontrol edin.';
-      default:
-        return 'Bir ağ hatası oluştu. Lütfen tekrar deneyin.';
+    } on FirebaseFunctionsException catch (e) {
+      return Left(switch (e.code) {
+        'unauthenticated' => 'Analiz için doğrulanmış hesabınızla giriş yapın.',
+        'resource-exhausted' =>
+          'Günlük analiz sınırına ulaşıldı. Yarın tekrar deneyin.',
+        'failed-precondition' =>
+          'Uygulama doğrulanamadı. Güncel sürümü kullanın.',
+        'invalid-argument' =>
+          'En fazla 5 MB boyutunda JPEG, PNG veya WebP seçin.',
+        _ =>
+          'Analiz servisine şu anda ulaşılamıyor. Daha sonra tekrar deneyin.',
+      });
+    } catch (_) {
+      return const Left('Analiz tamamlanamadı. Bağlantınızı kontrol edin.');
     }
   }
 }

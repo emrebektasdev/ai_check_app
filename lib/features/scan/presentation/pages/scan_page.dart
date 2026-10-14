@@ -11,8 +11,6 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../data/providers/scan_notifier.dart';
-import '../../../../data/providers/settings_notifier.dart';
-import '../../../../shared/widgets/daily_limit_dialog.dart';
 
 class ScanPage extends ConsumerStatefulWidget {
   const ScanPage({super.key});
@@ -40,13 +38,6 @@ class _ScanPageState extends ConsumerState<ScanPage> {
     }
   }
 
-  void _showPaywall() {
-    showDialog(
-      context: context,
-      builder: (context) => const DailyLimitDialog(),
-    );
-  }
-
   Future<void> _analyzeImage() async {
     if (_selectedImage == null) return;
 
@@ -65,15 +56,7 @@ class _ScanPageState extends ConsumerState<ScanPage> {
       return;
     }
 
-    final canScan = ref.read(settingsNotifierProvider).canScan;
-    if (!canScan) {
-      _showPaywall();
-      return;
-    }
-
-    // Increment usage
-    ref.read(settingsNotifierProvider.notifier).incrementScanCount();
-
+    // Authentication and quota are enforced by the server.
     // Start scan
     ref.read(scanNotifierProvider.notifier).scanImage(_selectedImage!);
   }
@@ -138,11 +121,12 @@ class _ScanPageState extends ConsumerState<ScanPage> {
                                     AppSizes.radiusLg,
                                   ),
                                   child: Shimmer.fromColors(
-                                    baseColor: AppColors.surface.withValues(alpha: 
-                                      0.2,
+                                    baseColor: AppColors.surface.withValues(
+                                      alpha: 0.2,
                                     ),
-                                    highlightColor: AppColors.accent
-                                        .withValues(alpha: 0.5),
+                                    highlightColor: AppColors.accent.withValues(
+                                      alpha: 0.5,
+                                    ),
                                     child: Container(color: AppColors.surface),
                                   ),
                                 )
